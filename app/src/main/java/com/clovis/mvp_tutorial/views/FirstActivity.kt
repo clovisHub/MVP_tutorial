@@ -15,13 +15,18 @@ class FirstActivity : AppCompatActivity(), FirstContract {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first)
+        initView()
+
+        val presenter = FirstPresenter(this)
+        presenter.makeCall()
+
+    }
+
+    private fun initView() {
         val layoutManager = LinearLayoutManager(this)
         recyclerId.layoutManager = layoutManager
         recyclerId.adapter = postListAdapter
         recyclerId.setHasFixedSize(true)
-        val presenter: FirstPresenter = FirstPresenter()
-        presenter.setPresenter(this)
-
     }
 
     override fun display(posts: List<Post>) {

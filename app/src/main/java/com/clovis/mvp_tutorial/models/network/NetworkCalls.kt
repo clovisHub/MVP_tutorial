@@ -21,14 +21,10 @@ object MyVolley {
         val stringRequest = StringRequest(
             Request.Method.GET,
             "https://jsonplaceholder.typicode.com/posts",
-            Response.Listener<String> { response ->
-
-                if(firstRepo != null) {
-                    // the line below send this response to the repository
-                    firstRepo.fetchData(response)
-                }
+            { response ->
+                firstRepo.fetchData(response)
             },
-            Response.ErrorListener {
+            {
                 Log.e("error", it.message)
             })
 
